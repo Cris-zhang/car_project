@@ -1,0 +1,10 @@
+com\qcby\carsProject\controller\BaseController.class
+com\qcby\carsProject\controller\UserController.class
+com\qcby\carsProject\entity\Tid.class
+com\qcby\carsProject\mapper\UserDao.class
+com\qcby\carsProject\service\impl\UserServiceImpl.class
+com\qcby\carsProject\controller\IndexController.class
+com\qcby\carsProject\entity\Base\ReturnModel.class
+com\qcby\carsProject\entity\TUser.class
+com\qcby\carsProject\entity\TCar.class
+com\qcby\carsProject\service\UserService.class

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册汽车保养管家系统账号</title>
+    <link rel="icon" href="/source/images/car.svg" type="image/x-icon"/>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="/source/css/mystyle.css" />
+    <script src="/source/js/jquery.js"></script>
+</head>
+<body>
+
+    <div class="whole">
+        <div class="title">欢迎来到注册界面！</div>
+
+            <div class="input_tit">你的账户是：</div>
+            <div class="input_box">
+                <input class="input_self" type="text" name="account" id="account" />
+            </div>
+            <div class='blank_30'></div>
+            <div class="input_tit">你的密码是：</div>
+            <div class="input_box">
+                <input class="input_self" type="text" name="password" id="password" />
+            </div>
+            <div class="input_tit">请再次输入密码：</div>
+            <div class="input_box">
+                <input class="input_self" type="text" name="ConfimPassword" id="ConfirmPassword" onkeyup="checkpassword()"/>
+                <span id="tishi"></span>
+            </div>
+            <div class="finish_box">
+                <input class="finish_btn" type="button" id="finish" name="finish" value="注册" onclick="register()" />
+            </div>
+
+
+    </div>
+
+
+
+</body>
+
+<script>
+    function checkpassword() {
+        var password = document.getElementById("password").value;
+        var repassword = document.getElementById("ConfirmPassword").value;
+
+        if(password == repassword) {
+            document.getElementById("tishi").innerHTML="<br><font color='green'>两次密码输入一致</font>";
+            document.getElementById("finish").disabled = false;
+
+        }else {
+            document.getElementById("tishi").innerHTML="<br><font color='red'>两次输入密码不一致!</font>";
+            document.getElementById("finish").disabled = true;
+        }
+    }
+    function register(){
+        var url = "/user/register";
+
+        // var account = document.getElementById("account").value;
+        // var password = document.getElementById("password").value;
+        $.ajax({
+            type: "post",
+            url: url,
+//		      data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+            data: {"username":$("#account").val(),
+                    "password":$("#password").val()
+            },
+            cache: false,
+            async : false,
+            dataType: "JSON",
+
+
+            success: function (res)
+            {
+                console.log(res)
+                if(res.code == 200 ){
+                    // alert("登录成功！")\
+                    alert("注册成功！自动跳转登录界面")
+                    location.href = "/pages/login.html";
+                }else {
+                    alert(res.message)
+                }
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+                alert(typeof(errorThrown));
+            }
+        });
+
+    }
+
+</script>
+
+</html>
